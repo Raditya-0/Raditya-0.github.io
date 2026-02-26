@@ -2,6 +2,16 @@
 
 Portfolio.initNavbar = function () {
     const { sections, state, smoothScrollTo } = Portfolio;
+    const navbar = document.querySelector('.navbar');
+
+    // Tambahkan efek perubahan navbar saat discroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }, { passive: true });
 
     // Handle ALL internal section links: navbar + hero buttons
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -9,7 +19,7 @@ Portfolio.initNavbar = function () {
             const targetId = link.getAttribute('href').replace('#', '');
             const targetSection = document.getElementById(targetId) ||
                 (targetId === '' ? document.querySelector('.hero') : null);
-            if (!targetSection) return; 
+            if (!targetSection) return;
 
             e.preventDefault();
 
